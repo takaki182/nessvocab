@@ -655,6 +655,7 @@ function flipCard() {
     front.className = 'card-face card-example-theme';
     let h = '<div class="card-label">EXAMPLE SENTENCE</div>';
     h += '<div class="card-body italic">'+esc(w.example||'—')+'</div>';
+    h += '<button class="btn-speak" onclick="event.stopPropagation();speakWord(this.dataset.word)" data-word="'+esc(w.example||'')+'">🔊</button>';
     front.innerHTML = h;
     flipper.classList.remove('is-flipped');
     updateMeta();
