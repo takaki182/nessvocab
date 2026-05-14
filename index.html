@@ -190,8 +190,8 @@ h1 {
   line-height: 1.4;
   opacity: 0.93;
   white-space: pre-line;
-  overflow-y: auto;
-  max-height: 210px;
+  overflow-y: hidden;
+  max-height: 100%;
   width: 100%;
   scrollbar-width: thin;
 }
@@ -659,6 +659,7 @@ function flipCard() {
     front.innerHTML = h;
     flipper.classList.remove('is-flipped');
     updateMeta();
+    fitExampleText(front);
   }
 }
 
@@ -785,6 +786,17 @@ initDeck(Object.keys(DATA)[0]);
   }, 3000);
 })();
 
+
+function fitExampleText(cardEl) {
+  const body = cardEl.querySelector('.card-body');
+  if (!body) return;
+  let size = 1.15;
+  body.style.fontSize = size + 'rem';
+  while (body.scrollHeight > body.clientHeight && size > 0.65) {
+    size = Math.round((size - 0.05) * 100) / 100;
+    body.style.fontSize = size + 'rem';
+  }
+}
 
 function speakWord(word) {
   if (!window.speechSynthesis) return;
